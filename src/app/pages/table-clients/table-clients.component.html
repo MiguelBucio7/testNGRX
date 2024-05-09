@@ -1,0 +1,147 @@
+<!-- <div class="card">
+    <p-toast></p-toast>
+    <p-table [value]="products" dataKey="id" editMode="row" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:20%">Code</th>
+                <th style="width:20%">Name</th>
+                <th style="width:20%">Inventory Status</th>
+                <th style="width:20%">Price</th>
+                <th style="width:20%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="product">
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input 
+                                pInputText type="text" 
+                                [(ngModel)]="product.code" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.code}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input 
+                                pInputText type="text" 
+                                [(ngModel)]="product.name" 
+                                required />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.name}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown 
+                                [options]="statuses" 
+                                appendTo="body" 
+                                [(ngModel)]="product.inventoryStatus" 
+                                [style]="{'width':'100%'}" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <p-tag 
+                                [value]="product.inventoryStatus" 
+                                [severity]="getSeverity(product.inventoryStatus)" />
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input 
+                                pInputText type="text" 
+                                [(ngModel)]="product.price" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.price | currency: 'USD'}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+            <div class="flex align-items-center justify-content-center gap-2">
+                <button 
+                    *ngIf="!editing" 
+                    pButton 
+                    pRipple 
+                    type="button" 
+                    pInitEditableRow 
+                    icon="pi pi-pencil" 
+                    class="p-button-rounded p-button-text">
+                </button>
+                <button 
+                    *ngIf="editing" 
+                    pButton 
+                    pRipple 
+                    type="button" 
+                    pSaveEditableRow 
+                    icon="pi pi-check" 
+                    (click)="onRowEditSave(product)" 
+                    class="p-button-rounded p-button-text p-button-success mr-2">
+                </button>
+                <button 
+                    *ngIf="editing" 
+                    pButton pRipple 
+                    type="button" 
+                    pCancelEditableRow 
+                    icon="pi pi-times" 
+                    (click)="onRowEditCancel(product, ri)" 
+                    class="p-button-rounded p-button-text p-button-danger">
+                </button>
+            </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->
+<form class="custompadding" [formGroup]="formProduct">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" formControlName="category" placeholder="Category">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" formControlName="quantity" placeholder="Quantity"> 
+      </div>
+     
+      <div class="col">
+        <button type="button" class="btn btn-primary" *ngIf="!productEdit" (click)="editAddItem()" [disabled]="formProduct.invalid">Agregar</button>
+        <button type="button" class="btn btn-primary mr" *ngIf="productEdit" (click)="editAction()">Editar</button>
+        <button type="button" class="btn btn-danger" *ngIf="productEdit" (click)="cancelAction()">Cancelar</button>
+      </div>
+     
+    </div>
+  </form>
+
+<p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-i="rowIndex">
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>
+                <i class="pi pi-pencil pointer mr" (click)="editAddItem(product)"></i>
+                <i class="pi pi-times pointer " (click)="deleteItem(product.code)"></i>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
