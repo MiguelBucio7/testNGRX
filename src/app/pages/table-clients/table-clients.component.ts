@@ -63,27 +63,7 @@ export class TableClientsComponent {
     console.log('product', product);
     if(this.products.find((r) => product)){
       console.log('dispatch update');
-      /* this.store.dispatch(updateProductRequest({ code: product.code as string, todo: product })) */
     }
-    /* if (product.price > 0) {
-      delete this.clonedProducts[product.id as string];
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Product is updated',
-      });
-    } else {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Invalid Price',
-      });
-    } */
-  }
-
-  onRowEditCancel(product: Product, index: number) {
-   /*  this.client[index] = this.clonedProducts[product.id as string];
-    delete this.clonedProducts[product.id as string]; */
   }
 
   getSeverity(status: string): "success" | "secondary" | "info" | "warning" | "danger" | "contrast" {
