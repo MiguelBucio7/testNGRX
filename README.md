@@ -1,0 +1,2 @@
+# testNGRX
+Prueba con NGRX
